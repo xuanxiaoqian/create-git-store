@@ -1,6 +1,6 @@
 {
   "name": "create-git-store",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "帮助你快速初始化git远程模板",
   "main": "index.js",
   "bin": {

@@ -25,17 +25,6 @@ npm init git-store project-git https://gitee.com/xuanxiaoqian/qian-cli.git maste
 
 
 
-使用npx
-
-~~~sh
-npx git-store <项目名称> <远程地址> [分支名]
-
-# 示例
-npx git-store  project-git https://gitee.com/xuanxiaoqian/qian-cli.git master
-~~~
-
-
-
 ## 作用
 
 修改项目文件夹为你输入的`项目名称`，删除`.git文件夹`，修改`package.json`里面的内容分别为

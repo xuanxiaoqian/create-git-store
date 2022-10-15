@@ -36,7 +36,7 @@ ok那么废话不多说直接开始！！！
 
 ## 2. 前提
 
-在学习之前，我们得去看一下世面上的npm工具有哪些，并且他们的使用方法是什么样的
+在学习之前，我们得去看一下世面上的初始化类npm工具有哪些，并且他们的使用方法是什么样的
 
 1. vue-cli
 
@@ -385,7 +385,7 @@ if (argv._.length < 2) {
 
 let projectName = argv._[0];
 let gitRemote = argv._[1];
-let gitBranch = argv._[3] ?? false;
+let gitBranch = argv._[3] ?? “master”;
 
 let regex = new RegExp(/^http(s)?:\/\/.*\.git$/);
 if (!regex.test(gitRemote)) {
@@ -404,7 +404,7 @@ console.log("可以执行命令了");
 2. 使用axios下载（gitee不可用）
 3. 通过clone下载
 
-我来说下我用这些遇到的问题。使用[download-git-repo](https://link.juejin.cn/?target=https%3A%2F%2Fwww.npmjs.com%2Fpackage%2Fdownload-git-repo)库下载的时候报错不能捕捉。使用axios下载局限性太多。所以我最终选择了通过git提供的clone下载
+我来说下我用这些分别遇到的问题。使用[download-git-repo](https://link.juejin.cn/?target=https%3A%2F%2Fwww.npmjs.com%2Fpackage%2Fdownload-git-repo)库下载的时候报错不能捕捉。使用axios下载局限性太大。所以我最终选择了通过git提供的clone下载
 
 node原生提供了一个库可以模拟用户执行命令
 
@@ -562,7 +562,7 @@ npm init git-store project-git https://gitee.com/xuanxiaoqian/qian-cli.git maste
 
 你以为上面那些就完了？不不不，真正的干货还在后面。
 
-上面的仅仅是最基本的功能实现，如果你后续如果要修改一点东西重新发布怎么办？
+上面的仅仅是最基本的功能实现，如果你后续要修改一点东西重新发布怎么办？
 
 1. 打包代码
 2. 修改`package.json`的version（npm不能发布低于现有版本）
@@ -570,7 +570,7 @@ npm init git-store project-git https://gitee.com/xuanxiaoqian/qian-cli.git maste
 
 
 
-你可能又说：“就这就这？我不偷懒我手动做，咋啦！” 那万一你还将代码放到github上呢？万一你代码在gitee和github上都有呢？还要git add、git commit、git push ......
+你可能又说：“就这就这？我不偷懒我手动做，咋啦！”  那万一你还将代码放到github上呢？万一你代码在gitee和github上都有呢？还要git add、git commit、git push ......
 
 我就问你麻不麻烦？ok，我们接下来解决这些问题
 
@@ -613,4 +613,48 @@ await $`echo 123`
 
 
 
-那么技巧交给你了，你知道接下来怎么做了吧
+那么技巧交给你了，你知道接下来怎么做了吧。这里给到我写的
+
+~~~js
+#!/usr/bin/env zx
+import "zx/globals";
+
+await $`npm run build`;
+
+let { version } = JSON.parse(fs.readFileSync("./package.json"));
+let _data = JSON.parse(fs.readFileSync("./package.json"));
+
+let v = _data.version.split(".").map(Number);
+
+v[v.length - 1] += 1;
+
+_data.version = v.join(".");
+
+fs.writeFileSync("./package.json", JSON.stringify(_data, null, 2));
+
+console.log(`版本号： ${version} -> ${_data.version}`);
+
+await $`git add .`;
+
+await $`git commit -m "版本号: ${_data.version}"`;
+
+await $`git push gitee master`;
+
+try {
+    await $`git push github master`
+  } catch (error) {}
+
+console.log(`版本号： ${version} -> ${_data.version}`);
+~~~
+
+
+
+上面就是本篇文章的全部内容啦，如果你从上面写下来遇到的错误解决不了。可以去看一下我写好的 [仓库(gitee)](https://gitee.com/xuanxiaoqian/create-git-store)对比一下
+
+最后就是该篇文章在`哔哩哔哩`后续有讲解 [传送](https://space.bilibili.com/473254123/?spm_id_from=333.999.0.0)欢迎关注一下呀~
+
+
+
+哔哩哔哩：[地址](https://space.bilibili.com/473254123/?spm_id_from=333.999.0.0)
+
+gitee: [地址](https://gitee.com/xuanxiaoqian/create-git-store)

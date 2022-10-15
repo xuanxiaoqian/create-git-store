@@ -241,7 +241,9 @@ if (argv._.length < 2) {
 }
 var projectName = argv._[0];
 var gitRemote = argv._[1];
-var gitBranch = argv._[3] ?? "master";
+var gitBranch = argv._[3];
+if (gitBranch === void 0)
+  gitBranch = "master";
 var regex = new RegExp(/^http(s)?:\/\/.*\.git$/);
 if (!regex.test(gitRemote)) {
   console.log(`\u65E0\u6548git\u5730\u5740${gitRemote},\u5FC5\u987B\u4EE5.git\u7ED3\u5C3E`);

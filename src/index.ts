@@ -14,7 +14,8 @@ if (argv._.length < 2) {
 
 let projectName = argv._[0];
 let gitRemote = argv._[1];
-let gitBranch = argv._[3] ?? "master";
+let gitBranch = argv._[3];
+if (gitBranch === undefined) gitBranch = "master";
 
 let regex = new RegExp(/^http(s)?:\/\/.*\.git$/);
 if (!regex.test(gitRemote)) {
@@ -23,18 +24,16 @@ if (!regex.test(gitRemote)) {
 }
 
 const removeDir = (filePath: string) => {
-  let statObj = fs.statSync(filePath); // fs.statSync同步读取文件状态，判断是文件目录还是文件。
+  let statObj = fs.statSync(filePath);
   if (statObj.isDirectory()) {
-    //如果是目录
-    let dirs = fs.readdirSync(filePath); //fs.readdirSync()同步的读取目标下的文件 返回一个不包括 '.' 和 '..' 的文件名的数组['b','a']
-    dirs = dirs.map((dir) => path.join(filePath, dir)); //拼上完整的路径
+    let dirs = fs.readdirSync(filePath);
+    dirs = dirs.map((dir) => path.join(filePath, dir));
     for (let i = 0; i < dirs.length; i++) {
-      // 深度 先将儿子移除掉 再删除掉自己
       removeDir(dirs[i]);
     }
-    fs.rmdirSync(filePath); //删除目录
+    fs.rmdirSync(filePath);
   } else {
-    fs.unlinkSync(filePath); //删除文件
+    fs.unlinkSync(filePath);
   }
 };
 
