@@ -21,7 +21,7 @@ try {
 
   await $`git commit -m "版本号: ${_data.version}"`;
 
-  await $`git push gitee mastedqwr`;
+  await $`git push gitee master`;
 
   try {
     await $`git push github master`;
@@ -29,7 +29,7 @@ try {
 
   console.log(`版本号： ${version} -> ${_data.version}`);
 } catch (err) {
-  console.log("报错了");
+  console.log("报错了,数据回滚");
 
   let { version } = JSON.parse(fs.readFileSync("./package.json"));
   let _data = JSON.parse(fs.readFileSync("./package.json"));

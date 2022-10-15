@@ -12,7 +12,7 @@
   "scripts": {
     "dev": "npx ts-node ./src/index.ts",
     "build": "node ./scripts/build.js",
-    "a": "zx ./scripts/prepublish.mjs"
+    "prepublishOnly": "zx ./scripts/prepublish.mjs"
   },
   "repository": {
     "type": "git",
