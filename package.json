@@ -1,0 +1,33 @@
+{
+  "name": "create-git-store",
+  "version": "1.0.4",
+  "description": "帮助你快速初始化git远程模板",
+  "main": "index.js",
+  "bin": {
+    "git-store": "./src/index.js"
+  },
+  "file": [
+    "src/index.js"
+  ],
+  "scripts": {
+    "dev": "npx ts-node ./src/index.ts",
+    "build": "node build.js",
+    "prepublishOnly": "zx prepublish.mjs"
+  },
+  "keywords": [
+    "create-git-store",
+    "git-store",
+    "xuanxiaoqian"
+  ],
+  "author": "xuanxiaoqian",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/minimist": "^1.2.2",
+    "@types/node": "^18.11.0",
+    "esbuild": "^0.15.11",
+    "typescript": "^4.8.4"
+  },
+  "dependencies": {
+    "minimist": "^1.2.7"
+  }
+}
