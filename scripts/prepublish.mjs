@@ -7,6 +7,7 @@ try {
   let { version } = JSON.parse(fs.readFileSync("./package.json"));
   let _data = JSON.parse(fs.readFileSync("./package.json"));
 
+
   let v = _data.version.split(".").map(Number);
 
   v[v.length - 1] += 1;
@@ -21,7 +22,7 @@ try {
 
   await $`git commit -m "版本号: ${_data.version}"`;
 
-  await $`git push gitee master`;
+  await $`git push gitee masters`;
 
   try {
     await $`git push github master`;
