@@ -20,8 +20,8 @@ await $`git add .`;
 
 await $`git commit -m "版本号: ${_data.version}"`;
 
-await $`git push gitee dev`;
+await $`git push gitee master`;
 
-await $`git push github dev`;
+await $`git push github master`;
 
 console.log(`版本号： ${version} -> ${_data.version}`);
