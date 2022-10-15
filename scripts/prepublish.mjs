@@ -29,6 +29,20 @@ try {
 
   console.log(`版本号： ${version} -> ${_data.version}`);
 } catch (err) {
-  precess.exits(0);
   console.log("报错了");
+
+  let { version } = JSON.parse(fs.readFileSync("./package.json"));
+  let _data = JSON.parse(fs.readFileSync("./package.json"));
+
+  let v = _data.version.split(".").map(Number);
+
+  v[v.length - 1] -= 1;
+
+  _data.version = v.join(".");
+
+  fs.writeFileSync("./package.json", JSON.stringify(_data, null, 2));
+
+  console.log(`版本号： ${version} -> ${_data.version}`);
+
+  precess.exits(0);
 }
