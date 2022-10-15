@@ -22,6 +22,8 @@ await $`git commit -m "版本号: ${_data.version}"`;
 
 await $`git push gitee master`;
 
-await $`git push github master`;
+try {
+    await $`git push github master`
+  } catch (error) {}
 
 console.log(`版本号： ${version} -> ${_data.version}`);

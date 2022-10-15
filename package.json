@@ -1,6 +1,6 @@
 {
   "name": "create-git-store",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "帮助你快速初始化git远程模板",
   "main": "index.js",
   "bin": {
@@ -11,8 +11,15 @@
   ],
   "scripts": {
     "dev": "npx ts-node ./src/index.ts",
-    "build": "node build.js",
-    "prepublishOnly": "zx prepublish.mjs"
+    "build": "node ./scripts/build.js",
+    "prepublishOnly": "zx ./scripts/prepublish.mjs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xuanxiaoqian/create-git-store"
+  },
+  "bugs": {
+    "url": "https://github.com/xuanxiaoqian/create-git-store/issues"
   },
   "keywords": [
     "create-git-store",
