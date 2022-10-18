@@ -1,6 +1,6 @@
 {
   "name": "create-git-store",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "帮助你快速初始化git远程模板",
   "main": "index.js",
   "bin": {
@@ -32,9 +32,8 @@
     "@types/minimist": "^1.2.2",
     "@types/node": "^18.11.0",
     "esbuild": "^0.15.11",
-    "typescript": "^4.8.4"
-  },
-  "dependencies": {
-    "minimist": "^1.2.7"
+    "minimist": "^1.2.7",
+    "typescript": "^4.8.4",
+    "zx": "^7.1.1"
   }
 }

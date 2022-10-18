@@ -23,6 +23,7 @@ if (!regex.test(gitRemote)) {
   process.exit(1);
 }
 
+// 递归删除文件夹
 const removeDir = (filePath: string) => {
   let statObj = fs.statSync(filePath);
   if (statObj.isDirectory()) {
