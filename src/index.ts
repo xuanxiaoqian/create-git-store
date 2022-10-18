@@ -41,7 +41,6 @@ const removeDir = (filePath: string) => {
 exec(`git clone -b ${gitBranch} ${gitRemote} ${projectName}`, (err) => {
   if (err) {
     console.log(`报错原因：${err}`);
-
     process.exit(1);
   }
 
